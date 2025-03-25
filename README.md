@@ -1,6 +1,6 @@
 # Ethical Data Marketplace
 
-![Ethical Data Marketplace Front Image](/frontimage.png)
+![Ethical Data Marketplace Front Image](ethicaldatamarketplace/public/frontimage.png)
 
 ## Introduction
 Ethical Data Marketplace is a decentralized platform that enables data creators to monetize their content securely using Filecoin and Akave. AI developers can purchase high-quality datasets ethically, ensuring fair payments and proper attribution to original creators.
