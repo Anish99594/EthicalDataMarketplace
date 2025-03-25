@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "install-akave": "go build -o bin/akavecli ./akavesdk",
+    "install-akave": "go build -o bin/akavecli ../akavesdk",
     "postinstall": "npm run install-akave",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
