@@ -1,5 +1,6 @@
 const { ethers } = require('ethers');
-const fs = require('fs');
+const fs = require('fs').promises;
+const path = require('path');
 const Dataset = require('../models/Dataset');
 const { createBucket, uploadToAkave, downloadFromAkave } = require('../utils/akave');
 const { encryptFile, decryptFile } = require('../utils/encryption');
@@ -16,16 +17,21 @@ const uploadDataset = async (req, res) => {
   const owner = req.headers['x-wallet-address'];
 
   const bucketName = `bucket-${Date.now()}`;
+  const fileName = `${name.replace(/\s+/g, '-')}.zip`;
+  const tempDir = path.resolve('./temp');
+  const filePath = path.join(tempDir, fileName);
+
   try {
+    // Create temp directory if it doesn’t exist
+    await fs.mkdir(tempDir, { recursive: true });
+
     await createBucket(bucketName);
 
     const { encrypted, key, iv } = encryptFile(file);
-    const fileName = `${name.replace(/\s+/g, '-')}.zip`;
-    const filePath = `./temp/${fileName}`;
-    fs.writeFileSync(filePath, encrypted);
+    await fs.writeFile(filePath, encrypted);
     const uploadResult = await uploadToAkave(bucketName, filePath, encrypted);
     console.log('Upload result:', uploadResult);
-    fs.unlinkSync(filePath);
+    await fs.unlink(filePath).catch(err => console.warn('Cleanup failed:', err.message));
 
     const dataset = new Dataset({
       name,
@@ -62,7 +68,6 @@ const buyDataset = async (req, res) => {
     if (!dataset) return res.status(404).json({ message: 'Dataset not found' });
     if (!dataset.contractId) return res.status(400).json({ message: 'Dataset not listed on contract' });
 
-    // Removed purchase check - frontend handles blockchain purchase first
     const encryptedBuffer = await downloadFromAkave(dataset.bucketName, dataset.fileName);
     res.json({
       encryptedData: encryptedBuffer.toString('base64'),
@@ -87,7 +92,7 @@ const updateDatasetContractId = async (req, res) => {
 };
 
 const getPurchasedDatasets = async (req, res) => {
-  const { ids } = req.query; // e.g., ids=1,2,3
+  const { ids } = req.query;
   if (!ids) return res.status(400).json({ message: 'No IDs provided' });
   const contractIds = ids.split(',');
   try {
