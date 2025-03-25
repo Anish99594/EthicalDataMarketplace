@@ -33,17 +33,21 @@ const downloadFromAkave = async (bucketName, fileName) => {
     throw new Error(`Invalid input: bucketName=${bucketName}, fileName=${fileName}`);
   }
   const tempDir = path.resolve('./temp');
+  const downloadedPath = path.join(tempDir, fileName);
+
+  // Ensure temp directory exists
+  await fs.mkdir(tempDir, { recursive: true });
+
   const cmd = `./bin/akavecli ipc file download ${bucketName} ${fileName} ${tempDir} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "${process.env.AKAVE_PRIVATE_KEY}"`;
   console.log('Executing command:', cmd);
 
   const { stdout, stderr } = await execPromise(cmd);
   console.log('Download stdout:', stdout);
   console.log('Download stderr:', stderr || 'No stderr');
-  if (stderr && !stderr.includes('File downloaded successfully')) { // Check stderr for success
+  if (stderr && !stderr.includes('File downloaded successfully')) {
     throw new Error(`Akave download failed: ${stderr}`);
   }
   await setTimeout(2000); // Keep delay to ensure file is written
-  const downloadedPath = path.join(tempDir, fileName);
   const buffer = await fs.readFile(downloadedPath);
   console.log('File read, size:', buffer.length);
   await fs.unlink(downloadedPath).catch(err => console.warn('Delete failed:', err.message));
