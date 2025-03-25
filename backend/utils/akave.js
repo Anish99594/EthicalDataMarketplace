@@ -55,10 +55,12 @@ const createBucket = async (bucketName) => {
   console.log('Executing create bucket command:', cmd);
   const { stdout, stderr } = await execPromise(cmd);
   console.log('Bucket create stdout:', stdout);
-  if (stderr) {
-    console.error('Bucket create stderr:', stderr);
+  console.log('Bucket create stderr:', stderr);
+  if (stderr && !stderr.includes('Bucket created:')) {
     throw new Error(`Bucket creation failed: ${stderr}`);
   }
+  // Return bucket name or parse stderr for additional info if needed
+  return bucketName;
 };
 
 module.exports = { uploadToAkave, downloadFromAkave, createBucket };
