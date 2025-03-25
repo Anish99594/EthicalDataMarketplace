@@ -1,9 +1,9 @@
 const { exec } = require('child_process');
-const fs = require('fs').promises; // Use promises for async file operations
+const fs = require('fs').promises;
 const util = require('util');
 const execPromise = util.promisify(exec);
 const path = require('path');
-const { setTimeout } = require('timers/promises'); // Add this for delay
+const { setTimeout } = require('timers/promises');
 require('dotenv').config();
 
 const uploadToAkave = async (bucketName, filePath, encryptedBuffer) => {
@@ -11,7 +11,7 @@ const uploadToAkave = async (bucketName, filePath, encryptedBuffer) => {
     await fs.writeFile(filePath, encryptedBuffer);
     console.log('File written to:', filePath);
 
-    const cmd = `akavecli ipc file upload ${bucketName} ${filePath} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "$(cat ${process.env.AKAVE_PRIVATE_KEY_FILE})"`;
+    const cmd = `akavecli ipc file upload ${bucketName} ${filePath} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "${process.env.AKAVE_PRIVATE_KEY}"`;
     console.log('Executing command:', cmd);
 
     const stdout = await new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ const downloadFromAkave = async (bucketName, fileName) => {
   }
   const tempDir = path.resolve('./temp');
   console.log('Temp dir:', tempDir);
-  const cmd = `akavecli ipc file download ${bucketName} ${fileName} ${tempDir} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "$(cat ${process.env.AKAVE_PRIVATE_KEY_FILE})"`;
+  const cmd = `akavecli ipc file download ${bucketName} ${fileName} ${tempDir} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "${process.env.AKAVE_PRIVATE_KEY}"`;
   console.log('Executing command:', cmd);
   let stdout, stderr;
   try {
@@ -73,7 +73,8 @@ const downloadFromAkave = async (bucketName, fileName) => {
 };
 
 const createBucket = async (bucketName) => {
-  const cmd = `akavecli ipc bucket create ${bucketName} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "$(cat ${process.env.AKAVE_PRIVATE_KEY_FILE})"`;
+  const cmd = `akavecli ipc bucket create ${bucketName} --node-address=${process.env.AKAVE_NODE_ADDRESS} --private-key "${process.env.AKAVE_PRIVATE_KEY}"`;
+  console.log('Executing create bucket command:', cmd);
   await execPromise(cmd);
 };
 
