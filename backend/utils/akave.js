@@ -17,10 +17,10 @@ const uploadToAkave = async (bucketName, filePath, encryptedBuffer) => {
     const { stdout, stderr } = await execPromise(cmd);
     console.log('Upload stdout:', stdout);
     console.log('Upload stderr:', stderr || 'No stderr');
-    if (stderr && !stderr.includes('File uploaded successfully')) { // Check stderr for success
+    if (stderr && !stderr.includes('File uploaded successfully')) {
       throw new Error(`Akave upload failed: ${stderr}`);
     }
-    return stdout.trim() || stderr; // Return stderr if stdout is empty
+    return stdout.trim() || stderr;
   } catch (error) {
     console.error('UploadToAkave error:', error.stack);
     throw error;
@@ -38,11 +38,11 @@ const downloadFromAkave = async (bucketName, fileName) => {
 
   const { stdout, stderr } = await execPromise(cmd);
   console.log('Download stdout:', stdout);
-  console.log('Download stderr:', stderr);
-  if (stderr && !stdout.includes('File downloaded successfully')) {
+  console.log('Download stderr:', stderr || 'No stderr');
+  if (stderr && !stderr.includes('File downloaded successfully')) { // Check stderr for success
     throw new Error(`Akave download failed: ${stderr}`);
   }
-  await setTimeout(2000);
+  await setTimeout(2000); // Keep delay to ensure file is written
   const downloadedPath = path.join(tempDir, fileName);
   const buffer = await fs.readFile(downloadedPath);
   console.log('File read, size:', buffer.length);
