@@ -341,13 +341,13 @@ function Dashboard() {
 
   useEffect(() => {
     if (isConnected && address) {
-      fetch(`http://localhost:3001/api/datasets?owner=${address}`)
+      fetch(`https://ethicaldatamarketplace.onrender.com/api/datasets?owner=${address}`)
         .then((res) => res.json())
         .then((data) => setUploads(data))
         .catch((error) => console.error('Failed to fetch uploads:', error));
 
       if (purchaseIds && purchaseIds.length > 0) {
-        fetch(`http://localhost:3001/api/datasets/purchased?ids=${purchaseIds.join(',')}`)
+        fetch(`https://ethicaldatamarketplace.onrender.com/api/datasets/purchased?ids=${purchaseIds.join(',')}`)
           .then((res) => res.json())
           .then((data) => setPurchases(data))
           .catch((error) => console.error('Failed to fetch purchases:', error));

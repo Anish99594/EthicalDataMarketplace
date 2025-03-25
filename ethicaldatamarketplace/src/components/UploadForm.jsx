@@ -346,7 +346,7 @@ function UploadForm() {
 	form.append('file', formData.file);
   
 	try {
-	  const uploadRes = await fetch('http://localhost:3001/api/upload', {
+	  const uploadRes = await fetch('https://ethicaldatamarketplace.onrender.com/api/upload', {
 		method: 'POST',
 		headers: { 'x-wallet-address': address },
 		body: form,
@@ -372,7 +372,7 @@ function UploadForm() {
       const datasetId = event.args.id.toNumber();
 
       // 3. Update backend with contract dataset ID
-      const updateRes = await fetch('http://localhost:3001/api/updateDatasetContractId', {
+      const updateRes = await fetch('https://ethicaldatamarketplace.onrender.com/api/updateDatasetContractId', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tempId, contractId: datasetId }),

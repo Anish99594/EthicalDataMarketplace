@@ -317,7 +317,7 @@ function DatasetList() {
   useEffect(() => {
     const fetchDatasets = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/datasets');
+        const res = await fetch('https://ethicaldatamarketplace.onrender.com/api/datasets');
         const data = await res.json();
         setDatasets(data);
       } catch (error) {
@@ -381,7 +381,7 @@ function DatasetList() {
       console.log('Purchase transaction completed:', tx.hash);
   
       // Fetch encrypted data
-      const res = await fetch('http://localhost:3001/api/buy', {
+      const res = await fetch('https://ethicaldatamarketplace.onrender.com/api/buy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
