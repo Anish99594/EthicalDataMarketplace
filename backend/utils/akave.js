@@ -17,10 +17,10 @@ const uploadToAkave = async (bucketName, filePath, encryptedBuffer) => {
     const { stdout, stderr } = await execPromise(cmd);
     console.log('Upload stdout:', stdout);
     console.log('Upload stderr:', stderr || 'No stderr');
-    if (stderr && !stdout.includes('File uploaded successfully')) {
+    if (stderr && !stderr.includes('File uploaded successfully')) { // Check stderr for success
       throw new Error(`Akave upload failed: ${stderr}`);
     }
-    return stdout.trim();
+    return stdout.trim() || stderr; // Return stderr if stdout is empty
   } catch (error) {
     console.error('UploadToAkave error:', error.stack);
     throw error;
@@ -59,7 +59,6 @@ const createBucket = async (bucketName) => {
   if (stderr && !stderr.includes('Bucket created:')) {
     throw new Error(`Bucket creation failed: ${stderr}`);
   }
-  // Return bucket name or parse stderr for additional info if needed
   return bucketName;
 };
 
