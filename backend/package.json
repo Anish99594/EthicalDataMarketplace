@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "install-akave": "curl -L https://akave.ai/akavecli-install.sh | bash",
+    "postinstall": "npm run install-akave",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
