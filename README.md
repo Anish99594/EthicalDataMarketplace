@@ -116,13 +116,13 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Support
 For issues and support:
-- Open an issue on [GitHub](https://github.com/your-repo)
-- Contact us via email at **support@ethicaldatamarketplace.com**
+- Open an issue on [GitHub](https://github.com/Anish99594/EthicalDataMarketplace.git)
+- Contact us via email at **anishgajbhare2000@gmail.com**
 
 ---
 
 ## Links
-- **GitHub Repository:** [Ethical Data Marketplace](https://github.com/your-repo)
+- **GitHub Repository:** [Ethical Data Marketplace](https://github.com/Anish99594/EthicalDataMarketplace.git)
 - **Demo Video:** [Watch Here](https://demo-link.com)
-- **Project Website:** [Visit Here](https://yourwebsite.com)
+- **Project Website:** [Visit Here](https://ethical-data-marketplace.vercel.app/)
 
