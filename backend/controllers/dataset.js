@@ -1,5 +1,6 @@
 const { ethers } = require('ethers');
-const fs = require('fs').promises;
+const fs = require('fs'); // Full fs module for sync operations
+const fsPromises = require('fs').promises; // Promises API for async operations
 const path = require('path');
 const Dataset = require('../models/Dataset');
 const { createBucket, uploadToAkave, downloadFromAkave } = require('../utils/akave');
@@ -23,15 +24,15 @@ const uploadDataset = async (req, res) => {
 
   try {
     // Create temp directory if it doesn’t exist
-    await fs.mkdir(tempDir, { recursive: true });
+    await fsPromises.mkdir(tempDir, { recursive: true });
 
     await createBucket(bucketName);
 
     const { encrypted, key, iv } = encryptFile(file);
-    await fs.writeFile(filePath, encrypted);
+    await fsPromises.writeFile(filePath, encrypted);
     const uploadResult = await uploadToAkave(bucketName, filePath, encrypted);
     console.log('Upload result:', uploadResult);
-    await fs.unlink(filePath).catch(err => console.warn('Cleanup failed:', err.message));
+    await fsPromises.unlink(filePath).catch(err => console.warn('Cleanup failed:', err.message));
 
     const dataset = new Dataset({
       name,
