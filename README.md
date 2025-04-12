@@ -123,6 +123,6 @@ For issues and support:
 
 ## Links
 - **GitHub Repository:** [Ethical Data Marketplace](https://github.com/Anish99594/EthicalDataMarketplace.git)
-- **Demo Video:** [Watch Here](https://demo-link.com)
+- **Demo Video:** [Watch Here](https://youtu.be/VUrWS0noHlg)
 - **Project Website:** [Visit Here](https://ethical-data-marketplace.vercel.app/)
 
