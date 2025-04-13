@@ -1,9 +1,9 @@
-# Ethical Data Marketplace
+# DataEthix
 
-![Ethical Data Marketplace Front Image](ethicaldatamarketplace/public/frontimage.png)
+![DataEthix Front Image](ethicaldatamarketplace/public/frontimage.png)
 
 ## Introduction
-Ethical Data Marketplace is a decentralized platform that enables data creators to monetize their content securely using Filecoin and Akave. AI developers can purchase high-quality datasets ethically, ensuring fair payments and proper attribution to original creators.
+DataEthix is a decentralized platform that enables data creators to monetize their content securely using Filecoin and Akave. AI developers can purchase high-quality datasets ethically, ensuring fair payments and proper attribution to original creators.
 
 This platform bridges the gap between AI developers and data contributors, fostering transparency, privacy, and fairness in data sharing.
 
@@ -122,7 +122,7 @@ For issues and support:
 ---
 
 ## Links
-- **GitHub Repository:** [Ethical Data Marketplace](https://github.com/Anish99594/EthicalDataMarketplace.git)
+- **GitHub Repository:** [DataEthix](https://github.com/Anish99594/EthicalDataMarketplace.git)
 - **Demo Video:** [Watch Here](https://youtu.be/VUrWS0noHlg)
 - **Project Website:** [Visit Here](https://ethical-data-marketplace.vercel.app/)
 
