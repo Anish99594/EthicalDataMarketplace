@@ -7,7 +7,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <NavLink to="/">Ethical Data Marketplace</NavLink>
+          <NavLink to="/">DataEthix</NavLink>
         </div>
         <ul className="navbar-menu">
           <li>
