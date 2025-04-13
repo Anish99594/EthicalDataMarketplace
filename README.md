@@ -1,6 +1,6 @@
 # DataEthix
 
-![DataEthix Front Image](ethicaldatamarketplace/public/frontimage.png)
+![DataEthix Front Image](ethicaldatamarketplace/public/DataEthixFrontimage.png)
 
 ## Introduction
 DataEthix is a decentralized platform that enables data creators to monetize their content securely using Filecoin and Akave. AI developers can purchase high-quality datasets ethically, ensuring fair payments and proper attribution to original creators.
